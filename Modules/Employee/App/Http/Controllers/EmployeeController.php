@@ -1,56 +1,28 @@
 <?php
 
-namespace Modules\Employee\Http\Controllers;
+namespace Modules\Employee\App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use Modules\Employee\App\Repositories\EmployeeRepositoryInterface;
+use Modules\Employee\App\Http\Requests\CreateEmployeeRequest;
 
 class EmployeeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    protected $interface;
+
+    public function __construct(EmployeeRepositoryInterface $EmployeeRepositoryInterface)
     {
-        return view('employee::index');
+        $this->interface = $EmployeeRepositoryInterface;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function store(CreateEmployeeRequest $request)
     {
-        return view('employee::create');
+        $validatedData = $request->validated();
+        $employee = $this->interface->store($validatedData);
+
+        return response()->json([
+            'message' => 'Employee added successfully',
+            'employee' => $employee
+        ], 201);
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request) {}
-
-    /**
-     * Show the specified resource.
-     */
-    public function show($id)
-    {
-        return view('employee::show');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit($id)
-    {
-        return view('employee::edit');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, $id) {}
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy($id) {}
 }

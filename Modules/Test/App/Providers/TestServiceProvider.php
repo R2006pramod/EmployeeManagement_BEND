@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Employee\App\Providers;
+namespace Modules\Test\App\Providers;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
@@ -8,13 +8,13 @@ use Nwidart\Modules\Traits\PathNamespace;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 
-class EmployeeServiceProvider extends ServiceProvider
+class TestServiceProvider extends ServiceProvider
 {
     use PathNamespace;
 
-    protected string $name = 'Employee';
+    protected string $name = 'Test';
 
-    protected string $nameLower = 'employee';
+    protected string $nameLower = 'test';
 
     /**
      * Boot the application events.
@@ -36,11 +36,6 @@ class EmployeeServiceProvider extends ServiceProvider
     {
         $this->app->register(EventServiceProvider::class);
         $this->app->register(RouteServiceProvider::class);
-
-        $this->app->bind(
-            \Modules\Employee\App\Repositories\EmployeeRepositoryInterface::class,
-            \Modules\Employee\App\Repositories\EmployeeRepository::class
-        );
     }
 
     /**
@@ -56,8 +51,8 @@ class EmployeeServiceProvider extends ServiceProvider
      */
     protected function registerCommandSchedules(): void
     {
-        // $this->App->booted(function () {
-        //     $schedule = $this->App->make(Schedule::class);
+        // $this->app->booted(function () {
+        //     $schedule = $this->app->make(Schedule::class);
         //     $schedule->command('inspire')->hourly();
         // });
     }
