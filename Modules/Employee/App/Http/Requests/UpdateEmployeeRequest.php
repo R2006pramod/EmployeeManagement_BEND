@@ -25,21 +25,11 @@ class UpdateEmployeeRequest extends FormRequest
         $employee = $this->route('employee');
 
         return [
-            'name' => 'sometimes|string|max:255',
-
-            'email' => [
-                'sometimes',
-                'email',
-                Rule::unique('employees')->ignore($employee),
-            ],
-
             'phone' => [
                 'sometimes',
                 'string',
                 Rule::unique('employees')->ignore($employee),
             ],
-
-            'designation' => 'sometimes|in:Intern,Associate,Senior,Manager',
             'monthly_salary_package' => 'sometimes|numeric|min:0',
         ];
     }
