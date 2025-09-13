@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Employee\app\Repositories;
 
 use Modules\Employee\App\Models\Employee;
@@ -12,19 +13,28 @@ class EmployeeRepository implements EmployeeRepositoryInterface
         $salary = $data['monthly_salary_package'];
         $designation = $data['designation'];
 
+        // Tax Calculate
         $tax = 0;
         if ($salary >= 150000) {
             $tax = $salary * 0.05; // 5% tax
         } elseif ($salary >= 100000) {
-            $tax = $salary * 0.03; // 3% tax
+            $tax = 150000 * 0.03;
         }
+        // If salary < 100,000, tax will be 0
 
         // Bonus Calculate
         $bonus = 0;
         switch ($designation) {
-            case 'Manager': $bonus = $salary * 0.05; break;
-            case 'Senior': $bonus = $salary * 0.03; break;
-            case 'Associate': $bonus = $salary * 0.01; break;
+            case 'Manager':
+                $bonus = $salary * 0.05;
+                break;
+            case 'Senior':
+                $bonus = $salary * 0.03;
+                break;
+            case 'Associate':
+                $bonus = $salary * 0.01;
+                break;
+
         }
 
         // Net Salary Calculate
@@ -42,6 +52,7 @@ class EmployeeRepository implements EmployeeRepositoryInterface
             'monthly_net_salary' => $netSalary,
         ]);
     }
+
     /**
      * Get all employees.
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
@@ -49,16 +60,6 @@ class EmployeeRepository implements EmployeeRepositoryInterface
     public function getAll()
     {
         return Employee::latest()->paginate(10);
-    }
-
-    /**
-     * Find an employee by ID.
-     * @param int $id
-     * @return Employee
-     */
-    public function find(int $id)
-    {
-        return Employee::findOrFail($id);
     }
 
     /**
@@ -72,11 +73,11 @@ class EmployeeRepository implements EmployeeRepositoryInterface
         $employee = $this->find($id);
         $updatedData = $data;
 
-        // Salary or Designation Update also update calculation
+        // Recalculate if salary or designation is being updated
         $recalculate = isset($data['monthly_salary_package']) || isset($data['designation']);
 
         if ($recalculate) {
-//            If recalculate is true then update
+            // Use new data if available, otherwise fall back to existing data
             $salary = $data['monthly_salary_package'] ?? $employee->monthly_salary_package;
             $designation = $data['designation'] ?? $employee->designation;
 
@@ -85,27 +86,45 @@ class EmployeeRepository implements EmployeeRepositoryInterface
             if ($salary >= 150000) {
                 $tax = $salary * 0.05;
             } elseif ($salary >= 100000) {
-                $tax = $salary * 0.03;
+                $tax = 150000 * 0.03;
             }
 
             // Bonus Calculate
             $bonus = 0;
             switch ($designation) {
-                case 'Manager': $bonus = $salary * 0.05; break;
-                case 'Senior': $bonus = $salary * 0.03; break;
-                case 'Associate': $bonus = $salary * 0.01; break;
+                case 'Manager':
+                    $bonus = $salary * 0.05;
+                    break;
+                case 'Senior':
+                    $bonus = $salary * 0.03;
+                    break;
+                case 'Associate':
+                    $bonus = $salary * 0.01;
+                    break;
             }
 
+            // Add calculated values to the data array for updating
             $updatedData['monthly_tax_value'] = $tax;
             $updatedData['monthly_net_salary'] = $salary - $tax;
             $updatedData['yearly_increasing_bonus'] = $bonus;
         }
 
         $employee->update($updatedData);
-        return $employee->fresh();
+        return $employee->fresh(); // Return the updated model
+    }
+
+    /**
+     * Find an employee by ID.
+     * @param int $id
+     * @return Employee
+     */
+    public function find(int $id)
+    {
+        return Employee::findOrFail($id);
     }
 
 //    Delete Employee
+
     /**
      * Delete an employee.
      * @param int $id
@@ -118,6 +137,7 @@ class EmployeeRepository implements EmployeeRepositoryInterface
 
 
 //    Search Employee By Phone
+
     /**
      * Search employees by phone number.
      * @param string $phone

@@ -23,7 +23,14 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        return $this->employeeRepositoryInterface->getAll();
+        $employees = $this->employeeRepositoryInterface->getAll();
+
+        $employees->getCollection()->transform(function ($employee) {
+            $employee->yearly_net_salary = ($employee->monthly_net_salary * 12) + $employee->yearly_increasing_bonus;
+            return $employee;
+        });
+
+        return $employees;
     }
 
     /**
@@ -32,6 +39,8 @@ class EmployeeController extends Controller
     public function update(UpdateEmployeeRequest $request, \Modules\Employee\App\Models\Employee $employee)
     {
         $updatedEmployee = $this->employeeRepositoryInterface->update($employee->id, $request->validated());
+
+        $updatedEmployee->yearly_net_salary = ($updatedEmployee->monthly_net_salary * 12) + $updatedEmployee->yearly_increasing_bonus;
 
         return response()->json([
             'message' => 'Employee updated successfully',
@@ -54,6 +63,8 @@ class EmployeeController extends Controller
         $validatedData = $request->validated();
         $employee = $this->employeeRepositoryInterface->create($validatedData);
 
+        $employee->yearly_net_salary = ($employee->monthly_net_salary * 12) + $employee->yearly_increasing_bonus;
+
         return response()->json([
             'message' => 'Employee added successfully',
             'employee' => $employee
@@ -68,6 +79,12 @@ class EmployeeController extends Controller
         $request->validate(['phone' => 'required|string']);
 
         $employees = $this->employeeRepositoryInterface->searchByPhone($request->phone);
+
+        $employees->transform(function ($employee) {
+            $employee->yearly_net_salary = ($employee->monthly_net_salary * 12) + $employee->yearly_increasing_bonus;
+            return $employee;
+        });
+
         return response()->json($employees);
     }
 }
