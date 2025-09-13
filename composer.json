@@ -70,7 +70,7 @@
         "allow-plugins": {
             "pestphp/pest-plugin": true,
             "php-http/discovery": true,
-            "wikimedia/composer-merge-plugin": true
+            "wikimedia/composer-merge-plugin": false
         }
     },
     "minimum-stability": "stable",

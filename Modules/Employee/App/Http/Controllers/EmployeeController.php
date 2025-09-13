@@ -1,28 +1,73 @@
 <?php
 
-namespace Modules\Employee\App\Http\Controllers;
+namespace Modules\Employee\app\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Modules\Employee\App\Repositories\EmployeeRepositoryInterface;
-use Modules\Employee\App\Http\Requests\CreateEmployeeRequest;
+use Modules\Employee\app\Http\Requests\UpdateEmployeeRequest;
+use Modules\Employee\app\Http\Requests\CreateEmployeeRequest;
 
 class EmployeeController extends Controller
 {
-    protected $interface;
+    protected $employeeRepositoryInterface;
 
-    public function __construct(EmployeeRepositoryInterface $EmployeeRepositoryInterface)
+    public function __construct(EmployeeRepositoryInterface $employeeRepositoryInterface)
     {
-        $this->interface = $EmployeeRepositoryInterface;
+        $this->employeeRepositoryInterface = $employeeRepositoryInterface;
     }
 
+
+    /**
+     * Display All Employees
+     */
+    public function index()
+    {
+        return $this->employeeRepositoryInterface->getAll();
+    }
+
+    /**
+     * Update An Employee
+     */
+    public function update(UpdateEmployeeRequest $request, \Modules\Employee\App\Models\Employee $employee)
+    {
+        $updatedEmployee = $this->employeeRepositoryInterface->update($employee->id, $request->validated());
+
+        return response()->json([
+            'message' => 'Employee updated successfully',
+            'employee' => $updatedEmployee
+        ]);
+    }
+
+    /**
+     * Remove An Employee
+     */
+    public function destroy(int $id)
+    {
+        $this->employeeRepositoryInterface->delete($id);
+        return response()->json(['message' => 'Employee deleted successfully']);
+    }
+
+//    Store An Employee
     public function store(CreateEmployeeRequest $request)
     {
         $validatedData = $request->validated();
-        $employee = $this->interface->store($validatedData);
+        $employee = $this->employeeRepositoryInterface->create($validatedData);
 
         return response()->json([
             'message' => 'Employee added successfully',
             'employee' => $employee
-        ], 201);
+        ], 200);
+    }
+
+    /**
+     * Search for employees by phone.
+     */
+    public function search(Request $request)
+    {
+        $request->validate(['phone' => 'required|string']);
+
+        $employees = $this->employeeRepositoryInterface->searchByPhone($request->phone);
+        return response()->json($employees);
     }
 }

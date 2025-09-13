@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Employee\App\Providers;
+namespace Modules\Employee\app\Providers;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
@@ -56,8 +56,8 @@ class EmployeeServiceProvider extends ServiceProvider
      */
     protected function registerCommandSchedules(): void
     {
-        // $this->App->booted(function () {
-        //     $schedule = $this->App->make(Schedule::class);
+        // $this->app->booted(function () {
+        //     $schedule = $this->app->make(Schedule::class);
         //     $schedule->command('inspire')->hourly();
         // });
     }

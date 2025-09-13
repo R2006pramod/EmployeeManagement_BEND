@@ -7,7 +7,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-        <title>Employee Module - {{ config('App.name', 'Laravel') }}</title>
+        <title>Employee Module - {{ config('app.name', 'Laravel') }}</title>
 
         <meta name="description" content="{{ $description ?? '' }}">
         <meta name="keywords" content="{{ $keywords ?? '' }}">
@@ -18,13 +18,13 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
         {{-- Vite CSS --}}
-        {{-- {{ module_vite('build-employee', 'resources/assets/sass/App.scss') }} --}}
+        {{-- {{ module_vite('build-employee', 'resources/assets/sass/app.scss') }} --}}
     </head>
 
     <body>
         {{ $slot }}
 
         {{-- Vite JS --}}
-        {{-- {{ module_vite('build-employee', 'resources/assets/js/App.js') }} --}}
+        {{-- {{ module_vite('build-employee', 'resources/assets/js/app.js') }} --}}
     </body>
 </html>

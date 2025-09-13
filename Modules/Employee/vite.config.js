@@ -15,8 +15,8 @@ export default defineConfig({
             publicDirectory: '../../public',
             buildDirectory: 'build-employee',
             input: [
-                __dirname + '/resources/assets/sass/App.scss',
-                __dirname + '/resources/assets/js/App.js'
+                __dirname + '/resources/assets/sass/app.scss',
+                __dirname + '/resources/assets/js/app.js'
             ],
             refresh: true,
         }),
@@ -52,6 +52,6 @@ export default defineConfig({
 
 
 //export const paths = [
-//    'Modules/Employee/resources/assets/sass/App.scss',
-//    'Modules/Employee/resources/assets/js/App.js',
+//    'Modules/Employee/resources/assets/sass/app.scss',
+//    'Modules/Employee/resources/assets/js/app.js',
 //];

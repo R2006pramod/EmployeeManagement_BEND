@@ -33,8 +33,8 @@ return [
             'views/master' => 'resources/views/components/layouts/master.blade.php',
             'scaffold/config' => 'config/config.php',
             'composer' => 'composer.json',
-            'assets/js/App' => 'resources/assets/js/App.js',
-            'assets/sass/App' => 'resources/assets/sass/App.scss',
+            'assets/js/app' => 'resources/assets/js/app.js',
+            'assets/sass/app' => 'resources/assets/sass/app.scss',
             'vite' => 'vite.config.js',
             'package' => 'package.json',
         ],
@@ -110,13 +110,13 @@ return [
 
         /*
         |--------------------------------------------------------------------------
-        | The App path
+        | The app path
         |--------------------------------------------------------------------------
         |
-        | App folder name
+        | app folder name
         | for example can change it to 'src' or 'App'
         */
-        'app_folder' => 'App/',
+        'app_folder' => 'app/',
 
         /*
         |--------------------------------------------------------------------------
@@ -126,38 +126,38 @@ return [
         | Setting the generate key to false will not generate that folder
         */
         'generator' => [
-            // App/
-            'actions' => ['path' => 'App/Actions', 'generate' => false],
-            'casts' => ['path' => 'App/Casts', 'generate' => false],
-            'channels' => ['path' => 'App/Broadcasting', 'generate' => false],
-            'class' => ['path' => 'App/Classes', 'generate' => false],
-            'command' => ['path' => 'App/Console', 'generate' => false],
-            'component-class' => ['path' => 'App/View/Components', 'generate' => false],
-            'emails' => ['path' => 'App/Emails', 'generate' => false],
-            'event' => ['path' => 'App/Events', 'generate' => false],
-            'enums' => ['path' => 'App/Enums', 'generate' => false],
-            'exceptions' => ['path' => 'App/Exceptions', 'generate' => false],
-            'jobs' => ['path' => 'App/Jobs', 'generate' => false],
-            'helpers' => ['path' => 'App/Helpers', 'generate' => false],
-            'interfaces' => ['path' => 'App/Interfaces', 'generate' => false],
-            'listener' => ['path' => 'App/Listeners', 'generate' => false],
-            'model' => ['path' => 'App/Models', 'generate' => false],
-            'notifications' => ['path' => 'App/Notifications', 'generate' => false],
-            'observer' => ['path' => 'App/Observers', 'generate' => false],
-            'policies' => ['path' => 'App/Policies', 'generate' => false],
-            'provider' => ['path' => 'App/Providers', 'generate' => true],
-            'repository' => ['path' => 'App/Repositories', 'generate' => false],
-            'resource' => ['path' => 'App/Transformers', 'generate' => false],
-            'route-provider' => ['path' => 'App/Providers', 'generate' => true],
-            'rules' => ['path' => 'App/Rules', 'generate' => false],
-            'services' => ['path' => 'App/Services', 'generate' => false],
-            'scopes' => ['path' => 'App/Models/Scopes', 'generate' => false],
-            'traits' => ['path' => 'App/Traits', 'generate' => false],
+            // app/
+            'actions' => ['path' => 'app/Actions', 'generate' => false],
+            'casts' => ['path' => 'app/Casts', 'generate' => false],
+            'channels' => ['path' => 'app/Broadcasting', 'generate' => false],
+            'class' => ['path' => 'app/Classes', 'generate' => false],
+            'command' => ['path' => 'app/Console', 'generate' => false],
+            'component-class' => ['path' => 'app/View/Components', 'generate' => false],
+            'emails' => ['path' => 'app/Emails', 'generate' => false],
+            'event' => ['path' => 'app/Events', 'generate' => false],
+            'enums' => ['path' => 'app/Enums', 'generate' => false],
+            'exceptions' => ['path' => 'app/Exceptions', 'generate' => false],
+            'jobs' => ['path' => 'app/Jobs', 'generate' => false],
+            'helpers' => ['path' => 'app/Helpers', 'generate' => false],
+            'interfaces' => ['path' => 'app/Interfaces', 'generate' => false],
+            'listener' => ['path' => 'app/Listeners', 'generate' => false],
+            'model' => ['path' => 'app/Models', 'generate' => false],
+            'notifications' => ['path' => 'app/Notifications', 'generate' => false],
+            'observer' => ['path' => 'app/Observers', 'generate' => false],
+            'policies' => ['path' => 'app/Policies', 'generate' => false],
+            'provider' => ['path' => 'app/Providers', 'generate' => true],
+            'repository' => ['path' => 'app/Repositories', 'generate' => false],
+            'resource' => ['path' => 'app/Transformers', 'generate' => false],
+            'route-provider' => ['path' => 'app/Providers', 'generate' => true],
+            'rules' => ['path' => 'app/Rules', 'generate' => false],
+            'services' => ['path' => 'app/Services', 'generate' => false],
+            'scopes' => ['path' => 'app/Models/Scopes', 'generate' => false],
+            'traits' => ['path' => 'app/Traits', 'generate' => false],
 
-            // App/Http/
-            'controller' => ['path' => 'App/Http/Controllers', 'generate' => true],
-            'filter' => ['path' => 'App/Http/Middleware', 'generate' => false],
-            'request' => ['path' => 'App/Http/Requests', 'generate' => false],
+            // app/Http/
+            'controller' => ['path' => 'app/Http/Controllers', 'generate' => true],
+            'filter' => ['path' => 'app/Http/Middleware', 'generate' => false],
+            'request' => ['path' => 'app/Http/Requests', 'generate' => false],
 
             // config/
             'config' => ['path' => 'config', 'generate' => true],
